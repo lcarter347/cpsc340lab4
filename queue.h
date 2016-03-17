@@ -1,20 +1,21 @@
 /*Lisa Carter
+  Justin Rice
   Section 1*/
 
 #include<iostream>
 
-#ifndef STACK_H_
-#define STACK_H_
+#ifndef QUEUE_H_
+#define QUEUE_H_
 
 
 
 template <class T>
-class stack{
+class queue{
     public:
-        stack();
-        ~stack();
-        void push(T);
-        T pop();
+        queue();
+        ~queue();
+        void enqueue(T);
+        T dequeue();
         T peek();
         int get_size();
         bool is_empty();
@@ -32,39 +33,39 @@ class stack{
 using namespace std;
 
 template<class T>
-stack<T>::stack(){
+queue<T>::queue(){
     head = NULL;
     tail = NULL;
     size = 0;
 }
 
 template<class T>
-stack<T>::~stack(){
+queue<T>::~queue(){
     while (size > 0){
-        pop();
+        dequeue();
     }
 }
 
 template<class T>    	
-void stack<T>::push(T val){
+void queue<T>::enqueue(T val){
     Node *n = new Node;
     n->data = val;
     n->prev = tail;
     n->next = NULL;
-    tail = n;
+    tail= n;
     if (size < 1){
-        head = n;
+        head= n;
     } 
     size++;
 }
 
 template<class T>    	
-T stack<T>::pop(){
+T queue<T>::dequeue(){
     if (is_empty()){
-        cout << "Cannot pop from an empty stack" << endl;
+        cout << "Cannot dequeue from an empty queue" << endl;
     } else {
-        Node *ptr = tail;
-        tail = ptr->prev;
+        Node *ptr = head;
+        head = ptr->next;
         T temp = ptr->data;
         size--;
         delete ptr;
@@ -74,12 +75,12 @@ T stack<T>::pop(){
 } 
 
 template<class T>    	
-int stack<T>::get_size(){
+int queue<T>::get_size(){
     return size;
 }
 
 template<class T>    	
-bool stack<T>::is_empty(){
+bool queue<T>::is_empty(){
     if (size < 1){
         return true;
     } else {
