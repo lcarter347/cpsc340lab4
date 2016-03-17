@@ -20,6 +20,8 @@ class llist{
         void remove();
         bool is_empty();
         int getsize();
+        void moveToHead();
+        void moveToTail();
     private:
         struct lNode{
             T data;
@@ -114,6 +116,16 @@ template<class T>
 bool llist<T>::is_empty(){
     if (size == 0) return true;
     else return false;
+}
+
+template<class T>
+void llist<T>::moveToHead(){
+    current = head;
+}
+
+template<class T>
+void llist<T>::moveToTail(){
+    current = tail;
 }
 
 #endif
