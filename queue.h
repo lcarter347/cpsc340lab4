@@ -21,13 +21,13 @@ class queue{
         int get_size();
         bool is_empty();
     private:
-        struct Node{
+        struct qnode{
             T data;
-            Node * next;
-            Node * prev;
+            qnode * next;
+            qnode * prev;
         };
-        Node *head;
-        Node *tail;
+        qnode *head;
+        qnode *tail;
         int size;
 };
 
@@ -49,7 +49,7 @@ queue<T>::~queue(){
 
 template<class T>    	
 void queue<T>::enqueue(T val){
-    Node *n = new Node;
+    qnode *n = new qnode;
     n->data = val;
     if (size < 1){
         head = n;
@@ -65,7 +65,7 @@ void queue<T>::enqueue(T val){
 
 template<class T>
 void queue<T>::print(){
-    Node *ptr = head;
+    qnode *ptr = head;
     for (int i = 0; i <= size; i++){
         if (ptr != NULL){
             cout << ptr->data << " ";
@@ -80,7 +80,7 @@ T queue<T>::dequeue(){
     if (is_empty()){
         cout << "Cannot dequeue from an empty queue" << endl;
     } else {
-        Node *ptr = head;
+        qnode *ptr = head;
         head = ptr->next;
         T temp = ptr->data;
         size--;
