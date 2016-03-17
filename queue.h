@@ -15,6 +15,7 @@ class queue{
         queue();
         ~queue();
         void enqueue(T);
+        void print();
         T dequeue();
         T peek();
         int get_size();
@@ -50,13 +51,28 @@ template<class T>
 void queue<T>::enqueue(T val){
     Node *n = new Node;
     n->data = val;
-    n->prev = tail;
-    n->next = NULL;
-    tail= n;
     if (size < 1){
-        head= n;
+        head = n;
     } 
+    n->prev = tail;
+    if (size > 0){ 
+        tail->next = n;
+    }
+    n->next = NULL;
+    tail = n;
     size++;
+}
+
+template<class T>
+void queue<T>::print(){
+    Node *ptr = head;
+    for (int i = 0; i <= size; i++){
+        if (ptr != NULL){
+            cout << ptr->data << " ";
+            ptr = ptr->next;
+        }
+    }
+    cout << endl;
 }
 
 template<class T>    	
