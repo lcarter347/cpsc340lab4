@@ -57,10 +57,12 @@ T llist<T>::get(){
 
 template<class T>
 void llist<T>::advance(){
-    if (current->next == NULL)
-        current = head;
-    else
-        current = current->next;    
+    if (size != 0){
+        if (current->next == NULL)
+            current = head;
+        else
+            current = current->next;    
+    }
 }
 
 template<class T>
@@ -108,5 +110,10 @@ int llist<T>::getsize(){
     return size;
 }
 
+template<class T>
+bool llist<T>::is_empty(){
+    if (size == 0) return true;
+    else return false;
+}
 
 #endif
