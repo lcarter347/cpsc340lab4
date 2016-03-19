@@ -17,7 +17,9 @@ class queue{
         void enqueue(T);
         void print();
         T dequeue();
-        T peek();
+        void forward();
+        void backward();
+        T getNode();
         int get_size();
         bool is_empty();
     private:
@@ -28,6 +30,7 @@ class queue{
         };
         qnode *head;
         qnode *tail;
+        qnode *current;
         int size;
 };
 
@@ -53,6 +56,7 @@ void queue<T>::enqueue(T val){
     n->data = val;
     if (size < 1){
         head = n;
+        current = n;
     } 
     n->prev = tail;
     if (size > 0){ 
@@ -78,7 +82,7 @@ void queue<T>::print(){
 template<class T>    	
 T queue<T>::dequeue(){
     if (is_empty()){
-        cout << "Cannot dequeue from an empty queue" << endl;
+       cout << "Can't dequeue from empty queue." << endl; 
     } else {
         qnode *ptr = head;
         head = ptr->next;
@@ -87,8 +91,28 @@ T queue<T>::dequeue(){
         delete ptr;
         return temp;
     }
-
 } 
+
+template<class T> 
+void queue<T>::forward(){
+    if (size != 0){
+        if (current->next != NULL)
+            current = current->next;    
+    }
+}
+
+template<class T> 
+void queue<T>::backward(){
+    if (size != 0){
+        if (current->prev != NULL)
+            current = current->prev;    
+    }
+}
+
+template<class T> 
+T queue<T>::getNode(){
+    return current->data;
+}
 
 template<class T>    	
 int queue<T>::get_size(){
@@ -103,6 +127,5 @@ bool queue<T>::is_empty(){
         return false;
     }
 }
-
 
 #endif
